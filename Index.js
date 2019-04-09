@@ -73,10 +73,3 @@ app.get('/OperationDevice',function(request,response){
     console.log('设置开关的设备信息，设备ID：'+JSON.parse(Operationjsonstr).devId+'请求指令信息'+JSON.parse(Operationjsonstr).param.cmd)//将json字符串转换成json对象
     response.end();
 })
-/* 监听请求supervisor */
-/* var server = app.listen(8082, function () {
-    var host = server.address().address
-    var port = server.address().port
-    console.log("已启动监听，访问地址为 http://%s:%s", host, port)
-
-}) */
