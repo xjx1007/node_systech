@@ -40,7 +40,7 @@ app.get('/GetFac', function (req, res) {
 /* 根据opneid获取用户对应的设备 */
 function GetDevice(openid,res) {
     var sql='select * from devicefac';
-    connection.query(sql,function(err,result){
+    connection.query(sql,function(err,result){//异步查询
         if(err){
             console.log('查询失败'+err)
             return;
@@ -48,13 +48,12 @@ function GetDevice(openid,res) {
         for (const key in result) {
             console.log('设备ID为'+result[key].DeviceID)
             console.log('设备名称为'+result[key].DeviceName)
-        }
-       
+        }       
         //console.log(result)
     })
     var device = {
-        'facArray': '',
-        'facidArray': ''
+        'facidArray': '',
+        'facArray': ''
     }
     if (openid == '1') {
         device.facArray = 'A';
@@ -74,10 +73,10 @@ app.get('/OperationDevice',function(request,response){
     console.log('设置开关的设备信息，设备ID：'+JSON.parse(Operationjsonstr).devId+'请求指令信息'+JSON.parse(Operationjsonstr).param.cmd)//将json字符串转换成json对象
     response.end();
 })
-/* 监听请求 */
+/* 监听请求supervisor */
 var server = app.listen(8082, function () {
     var host = server.address().address
     var port = server.address().port
-    console.log("应用实例，访问地址为 http://%s:%s", host, port)
+    console.log("已启动监听，访问地址为 http://%s:%s", host, port)
 
 })
